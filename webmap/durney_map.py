@@ -6,11 +6,11 @@ os.chdir('/home/dmonty/PycharmProjects/udemy/webmap')
 
 map = folium.Map(location=[28.228137, -82.716516], zoom_start=6, tiles="Mapbox Bright")
 
-fg = folium.FeatureGroup(name="Dave's Map!")
-fg.add_child(folium.Marker([28.228137, -82.716516], popup="I live here!", icon=folium.Icon(color='green')))
-fg.add_child(folium.Marker([29.928102, -81.435126], popup="Creta Massenge"))
-fg.add_child(folium.Marker([27.7902203, -82.722427], popup="Carol Hixon"))
-fg.add_child(folium.Marker([27.7902171, -82.7228409], popup="Robert White"))
+dm = folium.FeatureGroup(name="Dave's Map!")
+dm.add_child(folium.Marker([28.228137, -82.716516], popup="I live here!", icon=folium.Icon(color='green')))
+dm.add_child(folium.Marker([29.928102, -81.435126], popup="Creta Massenge"))
+dm.add_child(folium.Marker([27.7902203, -82.722427], popup="Carol Hixon"))
+dm.add_child(folium.Marker([27.7902171, -82.7228409], popup="Robert White"))
 
 data = pd.read_csv("Volcanoes_USA.txt")
 
@@ -35,11 +35,16 @@ for lt, ln, elev in zip(lat, lon, elev):
     # vols.add_child(folium.Marker([lt, ln], popup=str(elev), icon=folium.Icon(color=elev_clr(elev))))
 #  use this to put strings in markers:  popup=folium.Popup(name, parse_html=True)
 
-fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read(),
+pops = folium.FeatureGroup(name="Populations")
+pops.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read(),
                             style_function=lambda x: {'fillColor': 'green' if x['properties']['POP2005'] < 100000000
                             else 'orange' if 100000000 <= x['properties']['POP2005'] < 500000000 else 'red'}))
 
-map.add_child((fg))
+map.add_child((dm))
 map.add_child(vols)
+map.add_child(pops)
+
+map.add_child(folium.LayerControl())
+
 map.save("map1.html")
 
