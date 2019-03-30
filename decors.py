@@ -1,3 +1,5 @@
+"""This module contains custom debugging helpers"""
+
 import functools
 import time
 
@@ -39,3 +41,13 @@ def debug(func):
         print(f'{func.__name__!r} returned {value!r}')
         return value
     return wr_debug
+
+
+def slowdown(func):
+    """Sleep 1 second before calling func"""
+    @functools.wraps(func)
+    def wr_slowdown(*args, **kwargs):
+        time.sleep(1)
+        value = func(*args, **kwargs)
+        return value
+    return wr_slowdown
