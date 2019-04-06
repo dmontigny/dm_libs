@@ -20,6 +20,7 @@ elev = list(data['ELEV'])
 name = list(data['NAME'])
 print(elev)
 
+
 def elev_clr(el):
     if el < 1000:
         return 'green'
@@ -28,7 +29,9 @@ def elev_clr(el):
     else:
         return 'red'
 
+
 vols = folium.FeatureGroup(name="Volcanoes")
+
 for lt, ln, elev in zip(lat, lon, elev):
     vols.add_child(folium.CircleMarker([lt, ln], popup=str(elev), radius=6, fill_color=elev_clr(elev),\
                                        color='grey', fill_opacity=0.7))
@@ -37,14 +40,13 @@ for lt, ln, elev in zip(lat, lon, elev):
 
 pops = folium.FeatureGroup(name="Populations")
 pops.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read(),
-                            style_function=lambda x: {'fillColor': 'green' if x['properties']['POP2005'] < 100000000
-                            else 'orange' if 100000000 <= x['properties']['POP2005'] < 500000000 else 'red'}))
+                              style_function=lambda x: {'fillColor': 'green' if x['properties']['POP2005'] < 100000000
+                              else 'orange' if 100000000 <= x['properties']['POP2005'] < 500000000 else 'red'}))
 
-map.add_child((dm))
+map.add_child(dm)
 map.add_child(vols)
 map.add_child(pops)
 
 map.add_child(folium.LayerControl())
 
 map.save("map1.html")
-
