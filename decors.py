@@ -15,6 +15,17 @@ def decor(func):
     return wr_decor
 
 
+def fix_csv(func):
+    """Remove spaces from csv values and use Python engine"""
+    @functools.wraps(func)
+    def wr_fix_csv(*args, **kwargs):
+        # do something before
+        value = func(*args, **kwargs)
+        # do something after
+        return value
+    return wr_fix_csv
+
+
 # from https://realpython.com/lessons/debugging-code-decorators/
 def timer(func):
     """Print the runtime of the function"""
