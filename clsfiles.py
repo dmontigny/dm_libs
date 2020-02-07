@@ -17,7 +17,7 @@ class ClassBrowser(object):
 
     def get_dirs(self, location="S:\OBC"):
         self.location = path.normpath(location)
-        if self.location[0] == "\\" and self.location [1] != "\\":
+        if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
         # TODO: cannot read network share folders
