@@ -5,7 +5,7 @@ import sys
 import logging
 from os import path, remove
 
-class Class_Log(object):
+class ClassLog(object):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
