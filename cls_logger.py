@@ -5,6 +5,7 @@ import sys
 import logging
 from os import path, remove
 
+# def main():
 class ClassLog(object):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -32,3 +33,12 @@ class ClassLog(object):
         # Add the Handler to the Logger
         self.logger.addHandler(logger_handler)
         self.logger.info('logger configuration_complete!')
+
+
+# Python program to execute main directly
+# print("Always executed")
+#
+# if __name__ == "__main__":
+#     pass
+# else:
+#     print("Executed when imported")
