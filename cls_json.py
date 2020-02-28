@@ -5,9 +5,10 @@ from os import path
 import json
 import logging
 
-from cls_logger import Class_Log
+from cls_logger import ClassLog
+# import cls_logger
 
-jlogger = Class_Log()
+jlogger = ClassLog()
 
 class Class_JSON(object):
     def __init__(self):
