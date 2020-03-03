@@ -24,7 +24,6 @@ class ClassLog(object):
 
         # Append or new file?
         filemode = ('a', 'w')[self.new_file]
-        print(f"filemode: {filemode}")
 
         # Create the Handler for logging data to a file
         logger_handler = logging.FileHandler(path.basename(sys.argv[0][:-3]) + '.log', filemode, 'utf-8')
