@@ -1,27 +1,36 @@
 """ this class contains tools for working with json files. """
 
+import os
 import sys
 from os import path
 import json
-import logging
 
-from cls_logger import Class_Log
+# if "dm_libs" not in sys.path:
+#     sys.path.append(os.path.abspath('..\\..\\dm_libs'))
 
-jlogger = Class_Log()
+# TODO: find reference to cls_logger
+from cls_logger import ClassLog
 
-class Class_JSON(object):
-    def __init__(self):
-        jlogger.get_logger('cls_json')
+jlogger = ClassLog()
+
+
+class ClassJSON(object):
+    def __init__(self, log=True):
+        self.log = log
+        if self.log:
+            jlogger.get_logger('cls_logger')
         self.json = None
         self.tops = []
-        jlogger.logger.info("Class_JSON module loaded.")
-
+        if self.log:
+            jlogger.logger.info("Class_JSON module loaded.")
 
     def read_json(self, jfile):
         with open(jfile, "r") as read_file:
             self.json = json.load(read_file)
             read_file.close()
-        jlogger.logger.info(f"{jfile} file read")
+        if self.log:
+            jlogger.logger.info(f"{jfile} file read")
+        return self.json
 
     def parse_json(self, show=True):
         def get_subs(loc, spc=""):
@@ -55,3 +64,6 @@ class Class_JSON(object):
                     if show:
                         print(f"{k}: {v}")
 
+    def log_msg(self, msg):
+        if self.log:
+            jlogger.logger.info(msg)

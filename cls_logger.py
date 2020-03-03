@@ -37,8 +37,8 @@ class ClassLog(object):
 
 # Python program to execute main directly
 # print("Always executed")
-#
-# if __name__ == "__main__":
-#     pass
+
+#if __name__ == "__main__":
+#    pass
 # else:
 #     print("Executed when imported")
