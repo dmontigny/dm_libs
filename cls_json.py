@@ -18,7 +18,7 @@ class ClassJSON(object):
     def __init__(self, log=True):
         self.log = log
         if self.log:
-            jlogger.get_logger('cls_logger')
+            jlogger.get_logger('cls_logger', new_file=False)
         self.json = None
         self.tops = []
         if self.log:
