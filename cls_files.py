@@ -11,10 +11,10 @@ else:
 # import cls_logger
 from cls_logger import ClassLog
 
-print(f"os.path = {os.path}")
-print("sys.path:")
-for item in sys.path:
-    print(item)
+# print(f"os.path = {os.path}")
+# print("sys.path:")
+# for item in sys.path:
+#     print(item)
 
 mylogger = ClassLog
 # mylogger = cls_logger.ClassLog()
@@ -42,6 +42,7 @@ class ClassBrowser(object):
             mylogger.info(f'getting sub-dirs at {self.location}')
         self.folders = []
         for root, dirs, files in walk(self.location):
+            print(root, dirs, files)
             for loc in dirs:
                 self.folders.append(path.join(root, loc))
             for file in files:
