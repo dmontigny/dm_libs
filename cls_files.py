@@ -42,7 +42,6 @@ class ClassBrowser(object):
             mylogger.info(f'getting sub-dirs at {self.location}')
         self.folders = []
         for root, dirs, files in walk(self.location):
-            print(root, dirs, files)
             for loc in dirs:
                 self.folders.append(path.join(root, loc))
             for file in files:
@@ -57,7 +56,7 @@ class ClassBrowser(object):
         if self.log:
             mylogger.info('showing sub-dirs at {}'.format(self.location))
         for folder in self.folders:
-            logger.debug(folder)
+            mylogger.debug(folder)
 
     def search_4_text(self, target_ext, target_text):
         if self.log:

@@ -27,7 +27,6 @@ class ClassJSON(object):
     def read_json(self, jfile):
         with open(jfile, "r") as read_file:
             self.json = json.load(read_file)
-            read_file.close()
         if self.log:
             jlogger.logger.info(f"{jfile} file read")
         return self.json
