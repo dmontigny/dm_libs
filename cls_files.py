@@ -52,11 +52,11 @@ class ClassBrowser(object):
             mylogger.info(f'found {len(self.folders)} folders at {self.location}')
         return self.folders
 
-    def show_dirs(self):
-        if self.log:
-            mylogger.info('showing sub-dirs at {}'.format(self.location))
-        for folder in self.folders:
-            mylogger.debug(folder)
+    # def show_dirs(self):
+    #     if self.log:
+    #         mylogger.info('showing sub-dirs at {}'.format(self.location))
+    #     for folder in self.folders:
+    #         mylogger.debug(folder)
 
     def search_4_text(self, target_ext, target_text):
         if self.log:
@@ -70,6 +70,7 @@ class ClassBrowser(object):
                     f = open(self.target_text, "r")
                     for line in f:
                         print(line)
+
 
     def search_4_files(self, target_file):
         if self.log:
