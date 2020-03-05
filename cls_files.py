@@ -2,6 +2,7 @@
 from os import path, walk
 import os
 import sys
+from platform import system
 
 if "dm_libs" not in sys.path:
     sys.path.append(os.path.abspath('..\\..\\dm_libs'))
@@ -17,6 +18,7 @@ from cls_logger import ClassLog
 #     print(item)
 
 mylogger = ClassLog
+op_sys = ('Windows', 'Linux')[system() == 'Windows']
 # mylogger = cls_logger.ClassLog()
 
 
@@ -26,37 +28,50 @@ class ClassBrowser(object):
         if self.log:
             mylogger.get_Logger('cls_files')
         self.location = None
-        self.folders = None
-        self.files = None
+        self.folders = {}
+        self.files = {}
         self.target = None
         if self.log:
             mylogger.info(f'file searcher created')
 
     def get_dirs(self, location="S:\OBC"):
         self.location = path.normpath(location)
+        print(f"self.location: {self.location}")
         if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
         # TODO: cannot read network share folders
         if self.log:
             mylogger.info(f'getting sub-dirs at {self.location}')
-        self.folders = []
+        # self.folders = []
         for root, dirs, files in walk(self.location):
             for loc in dirs:
-                self.folders.append(path.join(root, loc))
-            for file in files:
-                self.folders.append(path.join(root, file))
-                pass
+                self.folders[loc] = path.join(root, loc)
 
         if self.log:
             mylogger.info(f'found {len(self.folders)} folders at {self.location}')
         return self.folders
 
-    # def show_dirs(self):
-    #     if self.log:
-    #         mylogger.info('showing sub-dirs at {}'.format(self.location))
-    #     for folder in self.folders:
-    #         mylogger.debug(folder)
+    def get_files(self, location="S:\OBC"):
+        self.location = path.normpath(location)
+        print(f"get files: {location}")
+        if self.location[0] == "\\" and self.location[1] != "\\":
+            self.location = "\\" + self.location
+
+        # TODO: cannot read network share folders
+        if self.log:
+            mylogger.info(f'getting files at {self.location}')
+        self.files = {}
+        for root, dirs, files in walk(self.location):
+            for file in files:
+                self.files[file.split(("\\", "/")[op_sys == "Windows"])[-1]] = self.location
+                # self.files.append(path.join(root, file))
+
+        if self.log:
+            mylogger.info(f'found {len(self.files)} folders at {self.location}')
+        return self.files
+
+
 
     def search_4_text(self, target_ext, target_text):
         if self.log:
@@ -71,7 +86,6 @@ class ClassBrowser(object):
                     for line in f:
                         print(line)
 
-
     def search_4_files(self, target_file):
         if self.log:
             mylogger.info(f'searching for {str(target_file).lower()}')
@@ -80,4 +94,9 @@ class ClassBrowser(object):
             if self.target_file in str(folder).lower():
                 print(folder)
 
+    # def show_dirs(self):
+    #     if self.log:
+    #         mylogger.info('showing sub-dirs at {}'.format(self.location))
+    #     for folder in self.folders:
+    #         mylogger.debug(folder)
 
