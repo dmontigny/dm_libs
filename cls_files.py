@@ -37,7 +37,7 @@ class ClassBrowser(object):
 
     def get_tree(self, location="S:\OBC"):
         self.location = path.normpath(location)
-        print(f"get files: {location}")
+        # print(f"get files: {location}")
         if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
@@ -76,7 +76,7 @@ class ClassBrowser(object):
 
     def get_files(self, location="S:\OBC"):
         self.location = path.normpath(location)
-        print(f"get files: {location}")
+        # print(f"get files: {location}")
         if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
