@@ -37,7 +37,7 @@ class ClassBrowser(object):
 
     def get_tree(self, location="S:\OBC"):
         self.location = path.normpath(location)
-        # print(f"get files: {location}")
+        print(f"get tree: {self.location}")
         if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
@@ -58,7 +58,7 @@ class ClassBrowser(object):
 
     def get_dirs(self, location="S:\OBC"):
         self.location = path.normpath(location)
-        print(f"self.location: {self.location}")
+        print(f"get dirs: {self.location}")
         if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
@@ -76,7 +76,7 @@ class ClassBrowser(object):
 
     def get_files(self, location="S:\OBC"):
         self.location = path.normpath(location)
-        # print(f"get files: {location}")
+        print(f"get files: {self.location}")
         if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
@@ -87,8 +87,8 @@ class ClassBrowser(object):
         for root, dirs, files in walk(self.location):
             for file in files:
                 self.files[file.split(("\\", "/")[op_sys == "Windows"])[-1]] = self.location
-                # self.files.append(path.join(root, file))
 
+        # print(f"self.files: {self.files}")
         if self.log:
             mylogger.info(f'found {len(self.files)} folders at {self.location}')
         return self.files
