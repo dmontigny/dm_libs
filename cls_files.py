@@ -76,7 +76,6 @@ class ClassBrowser(object):
 
     def get_files(self, location="S:\OBC"):
         self.location = path.normpath(location)
-        print(f"get files: {self.location}")
         if self.location[0] == "\\" and self.location[1] != "\\":
             self.location = "\\" + self.location
 
@@ -85,6 +84,7 @@ class ClassBrowser(object):
             mylogger.info(f'getting files at {self.location}')
         self.files = {}
         for root, dirs, files in walk(self.location):
+            print(f"get files: {files}")
             for file in files:
                 self.files[file.split(("\\", "/")[op_sys == "Windows"])[-1]] = self.location
 
